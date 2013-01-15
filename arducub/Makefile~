@@ -1,6 +1,0 @@
-ARDUINO_DIR = /opt/arduino
-TARGET = Blink
-BOARD_TAG = leonardo
-ARDUINO_PORT = /dev/ttyACM0
-
-include Arduino.mk
