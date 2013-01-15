@@ -1,5 +1,4 @@
-
-#include <Arduino.h>
+#include "nokia.h"
 
 #define PIN_SCE   7
 #define PIN_RESET 6
@@ -12,6 +11,7 @@
 
 #define LCD_X     84
 #define LCD_Y     48
+#define LCD_FILES LCD_Y/8
 
 static const byte ASCII[][5] =
 {
@@ -112,11 +112,8 @@ static const byte ASCII[][5] =
 ,{0x10, 0x08, 0x08, 0x10, 0x08} // 7e ←
 ,{0x78, 0x46, 0x41, 0x46, 0x78} // 7f →
 };
-void LcdWrite(byte dc, byte data);
-void LcdCharacter(char character);
-void LcdClear(void);
-void LcdInitialise(void);
-void LcdString(char *characters);
+
+char Memoria[LCD_X][LCD_Y/8];
 
 void LcdCharacter(char character)
 {
@@ -171,14 +168,4 @@ void LcdWrite(byte dc, byte data)
   shiftOut(PIN_SDIN, PIN_SCLK, MSBFIRST, data);
   digitalWrite(PIN_SCE, HIGH);
 }
-
-
-int main()
-{
-	LcdInitialise();
-	LcdClear();
-	LcdString("Hello World!");
-	while (1);
-}
-
 

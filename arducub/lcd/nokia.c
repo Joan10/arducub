@@ -198,5 +198,6 @@ int LcdPintaPixel(int x, int y){
 	m = e | m;
 	Memoria[x][fila] = m;
 	LcdWrite(LCD_D, m);
+
 	return 1;	
 }
