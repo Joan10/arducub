@@ -1,0 +1,10 @@
+nokia.o: nokia.c \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/Arduino.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/binary.h \
+  /opt/arduino-1.0.2/hardware/arduino/variants/leonardo/pins_arduino.h
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/Arduino.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/binary.h:
+
+/opt/arduino-1.0.2/hardware/arduino/variants/leonardo/pins_arduino.h:
