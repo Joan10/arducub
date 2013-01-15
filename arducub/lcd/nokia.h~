@@ -8,7 +8,7 @@ void LcdClear(void);
 void LcdInitialise(void);
 void LcdString(char *characters);
 void Lcdpixelxy(unsigned char x, unsigned char y);
-int LcdPintaPixel(int x, int y);
+void LcdPintaPixel(int x, int y);
 
 
 #endif

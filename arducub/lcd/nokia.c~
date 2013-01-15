@@ -189,9 +189,10 @@ int LcdPintaPixel(int x, int y){
 	
 	if (x<0 || x>83 || y<0 || y>47) return -1;
 
-	fila = y / 8; pos = y % 8;
-	m = Memoria[x][fila];	
+	m = Memoria[x][fila];
+	
 	e = 0x01;
+	fila = y / 8; pos = y % 8;
 	Lcdpixelxy(x,fila);
 	e = e << pos;
 	m = e | m;

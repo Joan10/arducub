@@ -47,6 +47,10 @@ int main(){
 		 20,0,
 		 20,20,};
 
+	for (i=0; i<84; i=i+2)
+		for (j=0; j<48; j=j+2)
+			LcdPintaPixel(i,j);			
+
 	LcdPintaPixel(q.a[0].x,q.a[0].y);
 	LcdPintaPixel(q.a[1].x,q.a[1].y);
 	LcdPintaPixel(q.a[2].x,q.a[2].y);

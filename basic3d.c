@@ -1,5 +1,5 @@
-//#include "basic3d.h"
-/*
+#include "basic3d.h"
+
 t_obj cub =
 {
     {
@@ -26,32 +26,5 @@ t_obj cub =
         3, 2, 0, //polygon v3,v2,v0
         2, 1, 0, //polygon v2,v1,v0
     }
-};*/
+};
 
-typedef struct {
-	int x,y;
-} t_vertex;
-
-typedef struct {
-	t_vertex a[4];
-} t_quadre;
-
-int main(){
-	int i,j;	
-	LcdInitialise();
-	LcdClear();
-
-	t_quadre q = 
-		{0,0,
-		 0,20,
-		 20,0,
-		 20,20,};
-
-	LcdPintaPixel(q.a[0].x,q.a[0].y);
-	LcdPintaPixel(q.a[1].x,q.a[1].y);
-	LcdPintaPixel(q.a[2].x,q.a[2].y);
-	LcdPintaPixel(q.a[3].x,q.a[3].y);
-
-	while (1);
-
-}

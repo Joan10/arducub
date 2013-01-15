@@ -1,4 +1,2 @@
 $ make
 $ make upload #Just després de pitjar "reset"
-
-El programa està al directori arducub

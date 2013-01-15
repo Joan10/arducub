@@ -1,6 +1,12 @@
 
-#define MAX_POLYGONS 2000
-#define MAX_VERTICES 2000
+
+#ifndef __basic3d__
+
+#include <Arduino.h>
+#include "lcd/nokia.h"
+
+#define MAX_POLYGONS 20
+#define MAX_VERTICES 20
 
 typedef struct {
     float x,y,z;
@@ -15,6 +21,4 @@ typedef struct {
     t_poligon polygon[MAX_POLYGONS];
 } t_obj,*t_obj_ptr;
 
-
-t_poligon poligon[MAX_POLYGONS]; //array de polígons
-t_vertex vertex[MAX_VERTICES];	// array de vèrtexs
+#endif
