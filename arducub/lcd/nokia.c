@@ -1,19 +1,6 @@
 #include "nokia.h"
 
-#define PIN_SCE   7
-#define PIN_RESET 6
-#define PIN_DC    5
-#define PIN_SDIN  4
-#define PIN_SCLK  3
-
-#define LCD_C     LOW
-#define LCD_D     HIGH
-
-#define LCD_X     84
-#define LCD_Y     48
-#define LCD_FILES LCD_Y/8
-
-static const byte ASCII[][5] =
+static const char ASCII[][5]   =
 {
  {0x00, 0x00, 0x00, 0x00, 0x00} // 20  
 ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
@@ -182,7 +169,7 @@ void Lcdpixelxy(unsigned char x, unsigned char y)
 }
 
 
-int LcdPintaPixel(int x, int y){
+char LcdPintaPixel(char x, char y){
 	
 	int fila; short pos;
 	char e,m;
@@ -190,13 +177,48 @@ int LcdPintaPixel(int x, int y){
 	if (x<0 || x>83 || y<0 || y>47) return -1;
 
 	fila = y / 8; pos = y % 8;
-	m = Memoria[x][fila];	
+	m = Memoria[(int)x][fila];	
 	e = 0x01;
 	Lcdpixelxy(x,fila);
 	e = e << pos;
 	m = e | m;
-	Memoria[x][fila] = m;
+	Memoria[(int)x][fila] = m;
 	LcdWrite(LCD_D, m);
 
 	return 1;	
+}
+
+char LcdPintaLinia(char x1, char y1, char x2, char y2){
+
+	float m; //pendent
+	float n; //desplaçament
+	char nx, ny,v;
+
+	LcdString("hola");
+//calcularem l'eq de la recta
+	if (x1 != x2){
+		m = (float) (y1-y2)/(x1-x2);
+		n = (float) (y1-m*x1);
+
+		v = x1; nx = x2;
+		if (x1<x2){
+			v = x2; nx = x1;
+		}
+		while (nx<=v){
+			ny = m*nx + n;
+			LcdPintaPixel(nx,ny);
+			nx++;	
+		}		
+	}else {
+		v = y1; nx = y2;
+		if (y1<y2){
+			v = y2; nx = y1;
+		}
+		while (nx<=v){
+			LcdPintaPixel(x1,nx);
+			nx++;	
+		}	
+	}
+
+	return 1;
 }
