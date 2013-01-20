@@ -1,60 +1,31 @@
 #include "basic3d.h"
-/*
-t_obj cub =
-{
-    {
-        -10,-10, 10, //vertex v0
-         10,-10, 10, //vertex v1
-         10,-10,-10, //vertex v2
-        -10,-10,-10, //vertex v3
-        -10, 10, 10, //vertex v4
-         10, 10, 10, //vertex v5
-         10, 10,-10, //vertex v6
-        -10, 10,-10  //vertex v7
-    },
-    {
-        0, 1, 4, //polygon v0,v1,v4
-        1, 5, 4, //polygon v1,v5,v4
-        1, 2, 5, //polygon v1,v2,v5
-        2, 6, 5, //polygon v2,v6,v5
-        2, 3, 6, //polygon v2,v3,v6
-        3, 7, 6, //polygon v3,v7,v6
-        3, 0, 7, //polygon v3,v0,v7
-        0, 4, 7, //polygon v0,v4,v7
-        4, 5, 7, //polygon v4,v5,v7
-        5, 6, 7, //polygon v5,v6,v7
-        3, 2, 0, //polygon v3,v2,v0
-        2, 1, 0, //polygon v2,v1,v0
-    }
-};*/
-/*
-int main(){
-	int i,j;	
-	LcdInitialise();
-	LcdClear();
-
-	t_quadre q = 
-		{0,0,
-		 0,20,
-		 20,0,
-		 20,20,};
-
-	LcdPintaPixel(q.a[0].x,q.a[0].y);
-	LcdPintaPixel(q.a[1].x,q.a[1].y);
-	LcdPintaPixel(q.a[2].x,q.a[2].y);
-	LcdPintaPixel(q.a[3].x,q.a[3].y);
-
-	while (1);
-
-}*/
-
 void Objecte3d::Crea(t_vertex *l_vertexs, t_aresta *l_aresta, int v, int a){
+	int i	;
 	nv = v; na = a;//número de vèrtexs
-	cjt_vertex = l_vertexs; //copiam el punter
-	cjt_aresta = l_aresta;
+	c.x=0; c.y = 0; c.z= 0;
+	for (i=0; i<v;i++){
+		cjt_vertex[i].x = l_vertexs[i].x;
+		cjt_vertex[i].y = l_vertexs[i].y;
+		cjt_vertex[i].z = l_vertexs[i].z;
+		cjt_vertex_o[i].x = l_vertexs[i].x;
+		cjt_vertex_o[i].y = l_vertexs[i].y;
+		cjt_vertex_o[i].z = l_vertexs[i].z;
+
+		c.x = c.x + cjt_vertex[i].x;
+		c.y = c.y + cjt_vertex[i].y;
+		c.z = c.z + cjt_vertex[i].z;
+	}
+	c.x=c.x/v; //Calculem el centre de l'objecte. cx = sum vx / numvertex  
+	c.y=c.y/v;
+	c.z=c.z/v;
+	for (i=0; i<a;i++){
+		cjt_aresta[i].t1 = l_aresta[i].t1;
+		cjt_aresta[i].t2 = l_aresta[i].t2;
+	}
+
 }
 
-void Objecte3d::Pinta(){
+void Objecte3d::Pinta(char esb){
 	//Primer només pintarem en 2d...
 	int i;
 	/*
@@ -62,19 +33,80 @@ void Objecte3d::Pinta(){
 		LcdPintaLinia(10,10,40,40);
 		LcdPintaLinia(60,40,17,3);
 */
-	for (i=0; i<na; i++){
-		
-		LcdPintaLinia((cjt_aresta[i].t1)->x,(cjt_aresta[i].t1)->y,(cjt_aresta[i].t2)->x,(cjt_aresta[i].t2)->y);
+	for (i=0; i<nv; i++){
+
+		LcdPintaPixel(cjt_vertex[i].x,cjt_vertex[i].y, esb);
+		//LcdPintaLinia((cjt_aresta[i].t1)->x,(cjt_aresta[i].t1)->y,(cjt_aresta[i].t2)->x,(cjt_aresta[i].t2)->y);
 	}
-		
+
+	for (i=0; i<na; i++){
+
+		LcdPintaLinia(cjt_vertex[cjt_aresta[i].t1].x,cjt_vertex[cjt_aresta[i].t1].y,cjt_vertex[cjt_aresta[i].t2].x,cjt_vertex[cjt_aresta[i].t2].y, esb);
+		//LcdPintaLinia((cjt_aresta[i].t1)->x,(cjt_aresta[i].t1)->y,(cjt_aresta[i].t2)->x,(cjt_aresta[i].t2)->y);
+	}
+	LcdPintaPixel(c.x,c.y,esb);
 	
 
 }
+
+void Objecte3d::Mou(int x, int y, int z){
+
+	t_vector d; // vector distància de la nova posició a la vella.
+	int i;
+	d.x = x - c.x; d.y =  y - c.y; d.z = z -  c.z; 
+	
+	for (i=0; i<nv; i++){
+		cjt_vertex[i].x = cjt_vertex[i].x + d.x;
+		cjt_vertex[i].y = cjt_vertex[i].y + d.y;
+		cjt_vertex[i].z = cjt_vertex[i].z + d.z;
+		cjt_vertex_o[i].x = cjt_vertex_o[i].x + d.x;
+		cjt_vertex_o[i].y = cjt_vertex_o[i].y + d.y;
+		cjt_vertex_o[i].z = cjt_vertex_o[i].z + d.z;
+	}
+
+	c.x = x; c.y = y; c.z = z;
+	
+}
+
+void Objecte3d::Rota(int ax, int ay, int az){
+//passem en graus i convertim a radians.
+	t_vertex d; // vèrtexs a l'origen. Els rotarem des de l'origen i després els sumarem.
+	int i;
+	float vcos, vsin, vx, vy;
+
+	vcos = cos((float)ax*M_PI/180);
+	vsin = sin((float)ax*M_PI/180);
+
+
+	for (i=0; i<nv; i++){
+
+		d.x = cjt_vertex_o[i].x - c.x; d.y =  cjt_vertex_o[i].y - c.y; d.z = cjt_vertex_o[i].z -  c.z; 
+		// Per evitar acumular error farem els càlculs sobre les coordenades originals sense rotar.
+
+		vx = (float)d.x*vcos + d.y*vsin; vy = (float) d.x*-1*vsin + d.y*vcos;
+
+		cjt_vertex[i].x = c.x + vx ;
+		cjt_vertex[i].y = c.y + vy ;
+		cjt_vertex[i].z = c.z + d.z;
+	}
+
 /*
-void Mou(int dx, int dy, int a){
-	//de moment res
+proves		
+		d.x = 10; d.y =  10; 
+		vx = (float)d.x*(vcos + vsin); vy = (float) d.y*(-1*vsin + vcos);
+
+		sprintf(a, "c:%i s:%i", (int)(1000*vcos), (int)(1000*vsin));
+		//LcdString(a);
+		
+		Lcdpixelxy(0,0);
+		sprintf(a, "%i %i %i %i    ", cjt_vertex[0].x, cjt_vertex[0].y,cjt_vertex[1].x, cjt_vertex[1].y);
+		sprintf(a, "%i %i %i %i    ", d.x, d.y,(int)(vsin*1000), (int)(vcos*1000));		
+		LcdString(a);
+		LcdPintaPixel( cjt_vertex[i-1].x,  cjt_vertex[i-1].y, 0);
+*/	
+
+
+
 	
 }
-*/
-
 			

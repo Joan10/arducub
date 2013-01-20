@@ -2,6 +2,7 @@
 #ifndef __LCD3310__
 #define __LCD3310__
 #include <Arduino.h>
+#include "/opt/arduino-1.0.2/libraries/EEPROM/EEPROM.h"	
 #define PIN_SCE   7
 #define PIN_RESET 6
 #define PIN_DC    5
@@ -24,7 +25,7 @@ void LcdClear(void);
 void LcdInitialise(void);
 void LcdString(char *characters);
 void Lcdpixelxy(unsigned char x, unsigned char y);
-char LcdPintaPixel(char x, char y);
-char LcdPintaLinia(char x1, char y1, char x2, char y2);
+char LcdPintaPixel(char x, char y, char esb);
+char LcdPintaLinia(int x1, int y1, int x2, int y2, char esb);
 
 #endif

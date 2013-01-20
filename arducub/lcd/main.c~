@@ -8,6 +8,10 @@ int main(){
 	LcdInitialise();
 	LcdClear();
 	LcdString("Hola");
-while (1);
+
+	for (i=0; i<84;i++)
+		for (j=0; j<48;j++)
+			LcdPintaPixel(i,j);
+	while (1);
 
 }
