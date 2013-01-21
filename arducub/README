@@ -1,0 +1,10 @@
+$ make
+$ make upload #Just després de pitjar "reset"
+
+El programa està al directori arducub.
+
+Descobriments i novetats:
+	1. Ja estan llestes quasi les funcionalitats bàsiques en 2d: Moure i rotar un objecte.
+	2. Problema del serial resolt. Si posam les funcions del programa principal per defecte d'arduino (setup() i loop()) funciona bé. Si només posam el main, 
+	es veu que el compilador es deixa qualque cosa i no manté la connexió amb el PC.  
+
