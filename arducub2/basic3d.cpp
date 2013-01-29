@@ -118,4 +118,17 @@ void Objecte3d::treuPosicio(int *x, int *y, int *z){
 	*x = c.x; *y = c.y; *z = c.z;
 
 }
+
+void Objecte3d::CanviaMida(int s){
+	int i;
+	for (i=0; i<nv; i++){
+		cjt_vertex[i].x = cjt_vertex[i].x * s;
+		cjt_vertex[i].y = cjt_vertex[i].y * s;
+		cjt_vertex[i].z = cjt_vertex[i].z * s;
+		cjt_vertex_o[i].x = cjt_vertex_o[i].x * s;
+		cjt_vertex_o[i].y = cjt_vertex_o[i].y * s;
+		cjt_vertex_o[i].z = cjt_vertex_o[i].z * s;
+	}
+
+}
 			

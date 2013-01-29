@@ -1,0 +1,41 @@
+basic3d.o: basic3d.cpp basic3d.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/Arduino.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/binary.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/WCharacter.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/WString.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/HardwareSerial.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/Stream.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/Print.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/Printable.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/new.h \
+  /opt/arduino-1.0.2/hardware/arduino/cores/arduino/USBAPI.h \
+  /opt/arduino-1.0.2/hardware/arduino/variants/leonardo/pins_arduino.h \
+  lcd/tft.h lcd/seq.h
+
+basic3d.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/Arduino.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/binary.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/WCharacter.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/WString.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/HardwareSerial.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/Stream.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/Print.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/Printable.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/new.h:
+
+/opt/arduino-1.0.2/hardware/arduino/cores/arduino/USBAPI.h:
+
+/opt/arduino-1.0.2/hardware/arduino/variants/leonardo/pins_arduino.h:
+
+lcd/tft.h:
+
+lcd/seq.h:

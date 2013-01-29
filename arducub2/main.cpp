@@ -5,7 +5,10 @@
 
 
 #define V_CUB {{0,0,0},{20,0,0},{20,20,0},{0,20,0},{0,0,40},{20,0,40},{20,20,40},{0,20,40}}
-t_vertex v_cub[8] = V_CUB;
+#define V_ESTRELLA {{20,0,0},{10,25,0},{30,25,0},{0,10,0},{40,10,0}}
+
+
+t_vertex v_cub[8] = V_CUB; t_vertex v_estrella[5] = V_ESTRELLA;
 t_aresta a_cub[12] = {   
 			{0,1} ,
 			{1,2} , 
@@ -22,6 +25,16 @@ t_aresta a_cub[12] = {
 			{2,6} ,
 			{3,7}
 		    };
+
+t_aresta a_estrella[5] = {   
+			{0,1} ,
+			{0,2} , 
+			{1,4} ,
+			{3,2} ,
+			{3,4}
+
+		    };
+
 
 int i,j;	int x, y, z;
 Objecte3d cub1; char byte_entrada;
@@ -40,8 +53,11 @@ void setup(){
 	Escriu("Hola", 20, 20, 1, 0xFFFF);
 
 	PintaRectangle(100, 103, 68, 71, 0xFFFF);*/
-	cub1.Objecte3d::Crea(v_cub, a_cub, sizeof(v_cub)/sizeof(t_vertex), sizeof(a_cub)/sizeof(t_aresta));
+	//cub1.Objecte3d::Crea(v_cub, a_cub, sizeof(v_cub)/sizeof(t_vertex), sizeof(a_cub)/sizeof(t_aresta));
+	cub1.Objecte3d::Crea(v_estrella, a_estrella, sizeof(v_estrella)/sizeof(t_vertex), sizeof(a_estrella)/sizeof(t_aresta));
+	cub1.CanviaMida(4);
 	cub1.Objecte3d::Mou(x,y,z);
+
 }
 void loop(){
 
@@ -51,14 +67,14 @@ void loop(){
 			if (byte_entrada == 'r'){
 				cub1.Objecte3d::Pinta(0x0000);
 				cub1.Objecte3d::Rota(i,0,0);
-				cub1.Objecte3d::Pinta(0xFFFF);
+				cub1.Objecte3d::Pinta(VERMELL);
 				//delay(50);
 				i=(i+5) % 360;
 			}else if (byte_entrada == 'd'){
 				x++;
 				cub1.Objecte3d::Pinta(0x0000);
 				cub1.Objecte3d::Mou(x,y,z);
-				cub1.Objecte3d::Pinta(0xFFFF);
+				cub1.Objecte3d::Pinta(VERMELL);
 
 			}
 
@@ -66,19 +82,22 @@ void loop(){
 				x--;
 				cub1.Objecte3d::Pinta(0x0000);
 				cub1.Objecte3d::Mou(x,y,z);
-				cub1.Objecte3d::Pinta(0xFFFF);
+				cub1.Objecte3d::Pinta(VERMELL);
 
 			}else if (byte_entrada == 'w'){
 				y++;
 				cub1.Objecte3d::Pinta(0x0000);
 				cub1.Objecte3d::Mou(x,y,z);
-				cub1.Objecte3d::Pinta(0xFFFF);
+				cub1.Objecte3d::Pinta(VERMELL);
 
 			}else if (byte_entrada == 's'){
 				y--;
 				cub1.Objecte3d::Pinta(0x0000);
 				cub1.Objecte3d::Mou(x,y,z);
-				cub1.Objecte3d::Pinta(0xFFFF);
+				cub1.Objecte3d::Pinta(VERMELL);
+
+			}else if (byte_entrada == 'g'){
+				cub1.CanviaMida(2);
 
 			}
 		}

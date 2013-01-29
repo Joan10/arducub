@@ -28,6 +28,7 @@ class Objecte3d {
 		void Mou(int x, int y, int z); //dx,dy vectors directors. a magnitud
 		void Rota(int ax, int ay, int az);
 		void treuPosicio(int *x, int *y, int *z);
+		void CanviaMida(int s); //s > 0 mes gran, s<0 mes petit
 	private:
 		t_vertex cjt_vertex[MAX_VERTICES];
 		t_aresta cjt_aresta[MAX_ARESTA];
